@@ -4,7 +4,8 @@ title: About
 permalink: /about/
 ---
 
-## Hey, I am Keshav
+
+![img](images/profile.jpeg)
 
 I'm a Computer Science graduate student at the University of Texas at Arlington, with a strong academic background, including a 4.0 GPA in my Master's program. 
 I'm looking for spring internships and full-time software developer roles. 
