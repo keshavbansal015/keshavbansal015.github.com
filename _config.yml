@@ -1,28 +1,11 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-# I'm a Computer Science graduate student at the University of Texas at Arlington, with a strong academic background, including a 4.0 GPA in my Master's program. I'm looking for spring internships and full-time software developer roles. My technical skills include Java, Python, C++, React, TensorFlow, Linux, and AWS. My experience spans roles such as Graduate Teaching Assistant, Software Developer Intern, and Python Teaching Assistant. I've worked on projects in cloud computing, SQL, and AI algorithms, demonstrating my ability to apply theoretical knowledge in practical scenarios.
-
-
 title: Keshav Bansal
-email: keshavbansal015@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
+author:
+  name: Keshav Bansal
+  email: keshavbansal015@gmail.com
+ 
+# The `>` after `description:` means to ignore line-breaks until next key.
+# If you want to omit the line-break after the end of text, use `>-` instead.
+description: >
   Welcome to my digital space, where I chronicle my adventures in technology and learning. 
   My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments. 
   I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create. 
@@ -37,6 +20,25 @@ linkedin_username: keshav-bansal-015
 theme: minima
 plugins:
   - jekyll-feed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+header_pages:
+  - about.md
+  - blogs.md
+  # - bookshelf.md
+  # - docushelf.md
+  # - extra.md
+
+# defaults:
+#   - scope:
+#       path: ""
+#       type: "posts"
+#     values:
+#       layout: "post"
+#       author: "KB"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -57,5 +59,26 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-include:
-  - assets/images/
+# include:
+#   - assets/images/
+
+  # Generate social links in footer.
+  social_links:
+   - { platform: devto,          user_url: "https://dev.to/keshavbansal015" }
+  #  - { platform: dribbble,       user_url: "https://dribbble.com/keshavbansal015" }
+  #  - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
+  #  - { platform: flickr,         user_url: "https://www.flickr.com/photos/199791468@N07/" }
+   - { platform: github,         user_url: "https://github.com/keshavbansal015/" }
+  #  - { platform: google_scholar, user_url: "https://scholar.google.com/citations?user=qc6CJjYAAAAJ" }
+  #  - { platform: instagram,      user_url: "https://www.instagram.com/testingposthere/" }
+  #  - { platform: keybase,        user_url: "https://keybase.io/jekyll" }
+   - { platform: linkedin,       user_url: "https://www.linkedin.com/in/keshav-bansal-015/" }
+  #  - { platform: microdotblog,   user_url: "https://micro.blog/jekyll" }
+  #  - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
+  #  - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/jekyll" }
+  #  - { platform: telegram,       user_url: "https://t.me/jekyll" }
+   - { platform: twitter,        user_url: "https://twitter.com/KxBBB015" }
+   - { platform: x,              user_url: "https://twitter.com/KxBBB015" }
+  #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
+
+
