@@ -1,0 +1,51 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima/skins/{{ site.minima.skin | default: 'classic' }}",
+  "minima/initialize";
+
+// p {
+//   // display: flex; /* Establishes a flex container */
+//   justify-content: center; /* Aligns items on the main axis */
+//   align-items: center; /* Aligns items on the cross axis */
+//   // flex-direction: row; /* Items are placed in a row */
+//   gap: 10px; /* Optional: Adds space between items */
+// }
+
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+
+.about-image {
+  width: 100%;
+  height: auto;
+  width: 200px; /* Fixed width */
+  height: 150px; /* Fixed height */
+  max-width: 100%; /* Responsive width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners */
+  margin: 10px; /* Space outside the border */
+  padding: 5px; /* Space between the border and the image */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: scale(1); /* Enlarge image */
+  object-fit: cover; /* Cover the container */
+  object-fit: contain; /* Fit within the container */
+  float: right; /* Float the image to the left */
+  display: inline; /* Inline with text */
+  display: block; /* On its own line */
+  // opacity: 0.5; /* 50% transparent */
+  // box-shadow: 5px 5px 10px #888888; /* Horizontal, vertical offsets, blur, and color */
+  // filter: grayscale(100%); /* Black and white */
+  // filter: blur(25px); /* Blurry image */
+  // filter: brightness(150%); /* Brighten image */
+  // filter: contrast(200%); /* Increase contrast */
+  // cursor: pointer; /* Change cursor to pointer */
+  // border: 1px solid #000000; /* Solid black border */
+}

@@ -18,8 +18,14 @@ linkedin_username: keshav-bansal-015
 
 # Build settings
 theme: minima
-plugins:
-  - jekyll-feed
+  # Available skins are:
+  # classic	           Default, light color scheme.
+  # dark	             Dark variant of the classic skin.
+  # auto	             Adaptive skin based on the default classic and dark skins.
+  # solarized-light	   Light variant of solarized color scheme.
+  # solarized-dark	   Dark variant of solarized color scheme.
+  # solarized	         Adaptive skin for solarized color scheme skins.
+skin: auto
 
 plugins:
   - jekyll-feed
@@ -27,7 +33,7 @@ plugins:
 
 header_pages:
   - about.md
-  - blogs.md
+  # - blogs.md
   # - bookshelf.md
   # - docushelf.md
   # - extra.md
@@ -63,22 +69,26 @@ header_pages:
 #   - assets/images/
 
   # Generate social links in footer.
-  social_links:
-   - { platform: devto,          user_url: "https://dev.to/keshavbansal015" }
-  #  - { platform: dribbble,       user_url: "https://dribbble.com/keshavbansal015" }
-  #  - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
-  #  - { platform: flickr,         user_url: "https://www.flickr.com/photos/199791468@N07/" }
-   - { platform: github,         user_url: "https://github.com/keshavbansal015/" }
+social_links:
+  - platform: devto
+    user_url: "https://dev.to/keshavbansal015"
+  - platform: github
+    user_url: "https://github.com/keshavbansal015/"
+  - platform: linkedin
+    user_url: "https://www.linkedin.com/in/keshav-bansal-015/"
+  - platform: x
+    user_url: "https://twitter.com/KxBBB015"
+  #  - { platform: twitter,        user_url: "https://twitter.com/KxBBB015" }
   #  - { platform: google_scholar, user_url: "https://scholar.google.com/citations?user=qc6CJjYAAAAJ" }
   #  - { platform: instagram,      user_url: "https://www.instagram.com/testingposthere/" }
   #  - { platform: keybase,        user_url: "https://keybase.io/jekyll" }
-   - { platform: linkedin,       user_url: "https://www.linkedin.com/in/keshav-bansal-015/" }
   #  - { platform: microdotblog,   user_url: "https://micro.blog/jekyll" }
   #  - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
   #  - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/1234567/jekyll" }
   #  - { platform: telegram,       user_url: "https://t.me/jekyll" }
-   - { platform: twitter,        user_url: "https://twitter.com/KxBBB015" }
-   - { platform: x,              user_url: "https://twitter.com/KxBBB015" }
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
+  #  - { platform: dribbble,       user_url: "https://dribbble.com/keshavbansal015" }
+  #  - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
+  #  - { platform: flickr,         user_url: "https://www.flickr.com/photos/199791468@N07/" }
 
 
