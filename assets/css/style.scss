@@ -5,21 +5,31 @@
 @import "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
 
-// p {
-//   // display: flex; /* Establishes a flex container */
-//   justify-content: center; /* Aligns items on the main axis */
-//   align-items: center; /* Aligns items on the cross axis */
-//   // flex-direction: row; /* Items are placed in a row */
-//   gap: 10px; /* Optional: Adds space between items */
-// }
-
-body, h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
+body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,dl,dd,ol,ul,figure {
   text-align: justify;
   text-justify: inter-word;
 }
 
+.home {
+  position:relative;
+  top: 25px;
+  line-height: 1.6;
+}
+
+.flex-container{
+  display:flex;
+  align-items: start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flexbox-item{
+  margin: 0 20px;
+}
+
+.contact-list{
+  margin: 5px;
+}
 
 .about-image {
   width: 100%;
