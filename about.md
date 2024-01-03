@@ -3,8 +3,6 @@ layout: page
 title: About
 permalink: /about/
 ---
-
-
 <!-- ![img](/assets/images/profile.jpeg) -->
 <img src="/assets/images/profile.jpeg" alt="profile image" class="about-image">
 
