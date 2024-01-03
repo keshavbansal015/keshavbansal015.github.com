@@ -33,7 +33,7 @@ plugins:
 
 header_pages:
   - about.md
-  # - blogs.md
+  - blogs.md
   # - bookshelf.md
   # - docushelf.md
   # - extra.md

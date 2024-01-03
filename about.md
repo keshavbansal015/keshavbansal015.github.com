@@ -3,15 +3,28 @@ layout: page
 title: About
 permalink: /about/
 ---
-<!-- ![img](/assets/images/profile.jpeg) -->
 <img src="/assets/images/profile.jpeg" alt="profile image" class="about-image">
 
+Hi, I am just a normal guy interested in CS, with a dream to not be obsoleted by AI.  
+Growing up in a normal family in New Delhi, India I didn't have much exposure to computers. But gradually through my undergrad and masters I realized how interesting this field can be.
+I am not a good programmer right now, but hopefully one day. I want to work with extra awesome people building awesome things providing awesome products and service to the world. 
 
-I'm a Computer Science graduate student at the University of Texas at Arlington, with a strong academic background, including a 4.0 GPA in my Master's program. 
-I'm looking for spring internships and full-time software developer roles. 
-My technical skills include Java, Python, C++, React, TensorFlow, Linux, and a fundamental knowledge of cloud technologies like GCP and AWS. 
-My experience spans roles such as Graduate Teaching Assistant, Software Developer Intern, and Python Teaching Assistant. 
-I've worked on projects in cloud computing, Database Internals, NLP, and AI algorithms, demonstrating my ability to apply theoretical knowledge in practical scenarios.
+__Some other points about me:__
 
-If you are a recruiter, please connect with me by following one of the links below.
-Check my resume here: [Keshav Resume](https://drive.google.com/file/d/1KVdmfe7VPEOoC7hX7do1ac6o1mXWXuMZ/view?usp=drive_link)
+* Love animals (specially the furry ones.)
+* I cook sometimes.
+* Always ready for a game of chess. Let's go!
+
+__Currently I am working on these things:__
+
+* Getting a little better at web development. 
+* Exploring the subject of system design.
+* RDBMS internals.
+* And hopefully give sometime to distributed systems.
+
+__Goals for this year:__
+
+* Code.code..code...
+* Get a job.
+* Pray consistently.
+* Become a better human being.
