@@ -1,116 +1,245 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-03T17:53:29-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
-</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Host a Static website on AWS</title><link href="http://localhost:4000/static-website-aws" rel="alternate" type="text/html" title="Host a Static website on AWS" /><published>2023-12-18T00:00:00-06:00</published><updated>2023-12-18T00:00:00-06:00</updated><id>http://localhost:4000/static-website-aws</id><content type="html" xml:base="http://localhost:4000/static-website-aws"><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Last semester(Fall 2023), I took cloud computing where I got a lot of exposure to Cloud technologies 
-and some exposure to DevOps technologies.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-04T22:06:28-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
+</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Host a Static Website on AWS</title><link href="http://localhost:4000/static-website-aws" rel="alternate" type="text/html" title="Host a Static Website on AWS" /><published>2023-12-18T00:00:00-06:00</published><updated>2023-12-18T00:00:00-06:00</updated><id>http://localhost:4000/static-website-aws</id><content type="html" xml:base="http://localhost:4000/static-website-aws"><![CDATA[<p><img src="/assets/Jan 2023/static-website/Happy programmer.gif" alt="Happy Programmer" class="blog-gif-top" /></p>
 
-<p>I am still not remotely confident in going around all these websites and all these tools, so I 
-want to continue practicing working on them.</p>
+<h2 id="introduction">Introduction</h2>
 
-<p>In this blog post, I want to solve the “Hello World” problem of the cloud. That is Host a static website on AWS.</p>
+<p>Last semester (Fall 2023), I took a course on cloud computing where I got a lot of exposure to Cloud technologies and some exposure to DevOps.</p>
+
+<p>Of course, I am still nowhere near confident with working with AWS, GCP, Azure, Terraform, etc., so I want to continue practicing working on them.</p>
+
+<p>In this blog post, I want to solve the “Hello World” problem of the cloud. That is to Host a static website on AWS.</p>
 
 <h3 id="what-is-a-static-website">What is a Static Website?</h3>
+
 <ul>
-  <li>In Simple terms, its just a bunch of HTML pages (hopefully with some CSS, maybe some Javascript.)</li>
-  <li>A static website does not have a backend system</li>
-  <li>It also does not have any databases.</li>
-  <li>It is simply a bunch of HTML pages hosted on the internet, like a simple blog.</li>
-  <li>As opposed to a static website, a dynamic website would have a backend and atleast 1 database system.</li>
+  <li>
+    <p>In Simple terms, it’s just a bunch of HTML pages (hopefully with some CSS, maybe some Javascript.)</p>
+  </li>
+  <li>
+    <p>A static website does not have a backend.</p>
+  </li>
+  <li>
+    <p>It also does not have any databases.</p>
+  </li>
+  <li>
+    <p>It is simply a bunch of HTML pages hosted on the internet.</p>
+  </li>
+  <li>
+    <p>As opposed to a static website, a dynamic website would have a backend and &gt;=0 databases.</p>
+  </li>
 </ul>
 
 <h3 id="why-choose-aws-for-hosting">Why Choose AWS for Hosting?</h3>
+
 <ul>
-  <li>No particular reason, you could very well choose any other cloud provider for this.</li>
+  <li>No particular reason, we could very well choose any other cloud provider for this.</li>
 </ul>
 
 <h3 id="prerequisites">Prerequisites</h3>
+
 <ul>
-  <li>AWS account.</li>
-  <li>Basic knowledge of HTML/CSS.</li>
+  <li>
+    <p>AWS account.</p>
+  </li>
+  <li>
+    <p>Basic knowledge of HTML/CSS.</p>
+  </li>
 </ul>
 
-<h3 id="step-1-creating-a-bucket-in-aws-s3">Step 1: Creating a Bucket in AWS S3</h3>
+<h3 id="step-1-creating-an-s3-bucket-in-aws">Step 1: Creating an S3 Bucket in AWS</h3>
+
 <ul>
-  <li>I could use other AWS services also to host the website, but using an S3 bucket is the most common, cost effective, simple way.</li>
-  <li>Search for S3 service, and click on Create Bucket.</li>
-  <li>Give a name to your bucket, like <strong>“static-website”</strong> (it has to be globally unique)</li>
-  <li>Enable ACLs: helps with writing access control policies for each object in our bucket.</li>
-  <li>Uncheck “Block all public access”, this would let us apply those ACLs.</li>
-  <li>Leave everything as it is and click “Create Bucket”.</li>
-  <li><strong>At this point, we have a place to upload our static website files in AWS and permissions to write ACLs for our objects in the S3 bucket.</strong></li>
+  <li>
+    <p>We could use other AWS services also to host the website (eg EC2 instance), but using an S3 bucket is the most common, cost-effective, simple way.</p>
+  </li>
+  <li>
+    <p>Search for S3 service, and click on Create Bucket.</p>
+  </li>
+  <li>
+    <p>Give a name to your bucket, like <strong>“static-website”</strong> (it has to be globally unique)</p>
+  </li>
+  <li>
+    <p>Enable ACLs: helps with writing Access Control Policies for each object in our bucket.</p>
+  </li>
+  <li>
+    <p>Uncheck “Block all public access”, this would let us apply those ACLs and get our website public.</p>
+  </li>
+  <li>
+    <p>Leave everything else as it is and click “Create Bucket”.</p>
+  </li>
 </ul>
+
+<p><strong>At this point, we have a place to upload our static website files in AWS and permissions to write ACLs for our objects (files) in the S3 bucket.</strong></p>
 
 <h3 id="step-2-uploading-files-to-s3">Step 2: Uploading Files to S3</h3>
+
 <ul>
-  <li>Now, select the bucket just created.</li>
-  <li>And upload the files with all the default settings.</li>
-  <li><strong>At this point, we have our files in the bucket, now we host it and make it public</strong></li>
-  <li>Check if all the files are indeed uploaded, then select them all, clock on “Actions”, scroll down and click on “Make public with ACLs”.</li>
-  <li>And that’s it.</li>
+  <li>
+    <p>Now, select the bucket just created.</p>
+  </li>
+  <li>
+    <p>And upload the files with all the default settings.</p>
+  </li>
+  <li>
+    <p>Check if all the files are indeed uploaded, then select them all, clock on “Actions”, scroll down, and click on “Make public with ACLs”.</p>
+  </li>
+  <li>
+    <p>This makes our files publicly accessible.</p>
+  </li>
 </ul>
 
 <h3 id="checking-public-access">Checking Public Access</h3>
+
 <ul>
-  <li>Go to the view where all the files you uploaded are listed.</li>
-  <li>click on any one of the files.</li>
-  <li>Click on object URL: We should be able to view the file.</li>
+  <li>
+    <p>Go to the view where all the files you uploaded are listed.</p>
+  </li>
+  <li>
+    <p>Click on any one of the files.</p>
+  </li>
+  <li>
+    <p>Click on object URL: We should be able to view the file.</p>
+
+    <p><strong>You now have your Static website hosted on the internet.</strong> <em>But wait!!!</em></p>
+  </li>
 </ul>
 
 <h3 id="setup-route-53-for-custom-url-optional">Setup Route 53 for custom URL (Optional)</h3>
-<ul>
-  <li>Go to Route 53 service, select “Get Started”.</li>
-  <li>__ To complete this section, our bucket name must match with our Custom URL name.__</li>
-  <li>Now, assuming we don’t have a custom URL, click on “Register a domain” (Selected by default).</li>
-  <li>Search for your custom URL, buy it, and wait for it to get registered.</li>
-</ul>
 
-<h3 id="step-4-connect-custom-url-to-s3-bucket-resourse">Step 4: Connect custom URL to S3 bucket resourse</h3>
-<ul>
-  <li>Now we need to go back to the S3 bucket, click on properties, scroll down to Static Web Hosting and click on Edit.</li>
-  <li>Select “Enable”, and use the following configurations:
-    <ul>
-      <li>Static website hosting: Enable</li>
-      <li>Hosting type: Host a static website</li>
-      <li>Index document: index.html (or whatever you want)</li>
-      <li>Error document: error.html (or leave it if you want)</li>
-    </ul>
-  </li>
-  <li>Click on “Save Changes”.</li>
-  <li>Now go back to the properties view, and copy the URL from the end of the page. It should look like this: http://<bucketname>.<bucketzone>.amazonaws.com</bucketzone></bucketname></li>
-  <li>Now back to the Route 53. Click on Hosted Zones from the side bar.</li>
-  <li>Select the Custom URL, and click on “Create Record”.</li>
-  <li>Flip the Alias switch, enter “Alias to S3 website endpoint” and then choose the zone where your bucket is hosted, eg: US East (N. Virginia) us-east-1.</li>
-  <li>Save the changes.</li>
-</ul>
+<p><strong>To complete this section, our bucket name must match our Custom URL name.</strong></p>
 
-<h3 id="enable-https-with-aws-certificate-manager-optional">Enable HTTPS with AWS Certificate Manager (Optional)</h3>
+<p>Now, we are gonna get a custom URL to host our website.</p>
+
 <ul>
   <li>
-    <p>Lookup Cloud Front from AWS services.</p>
+    <p>Go to Route 53 service, and select “Get Started”.</p>
   </li>
-  <li>Now, click on your custom URL,</li>
-  <li>Using AWS Route 53 for domain registration and DNS management.</li>
-  <li>Linking your custom domain to the S3 bucket.</li>
+  <li>
+    <p>Now, assuming we don’t have a custom URL, click on “Register a domain” (Selected by default).</p>
+  </li>
+  <li>
+    <p>Search for the custom URL of your choice, buy it, and wait for it to get registered.</p>
+  </li>
 </ul>
 
-<h3 id="step-5-enabling-https-with-aws-certificate-manager-optional">Step 5: Enabling HTTPS with AWS Certificate Manager (Optional)</h3>
+<h3 id="step-4-connect-custom-url-to-s3-bucket-resource">Step 4: Connect custom URL to S3 bucket resource</h3>
+
 <ul>
-  <li>Steps to secure your website with SSL/TLS using AWS Certificate Manager and CloudFront.</li>
+  <li>
+    <p>Now we need to go back to the S3 bucket, click on properties, scroll down to Static Web Hosting, and click on Edit.</p>
+  </li>
+  <li>
+    <p>Select “Enable”, and use the following configurations:</p>
+
+    <ul>
+      <li>
+        <p>Static website hosting: Enable</p>
+      </li>
+      <li>
+        <p>Hosting type: Host a static website</p>
+      </li>
+      <li>
+        <p>Index document: index.html (or whatever you want)</p>
+      </li>
+      <li>
+        <p>Error document: error.html (or leave it if you want)</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Click on “Save Changes”.</p>
+  </li>
+  <li>
+    <p>Now go back to the properties view, and copy the URL from the end of the page. It should look like this: http://&lt;\bucketname&gt;.&lt;\bucketzone&gt;.amazonaws.com</p>
+  </li>
+  <li>
+    <p>Now back to Route 53. Click on Hosted Zones from the sidebar.</p>
+  </li>
+  <li>
+    <p>Select the Custom URL, and click on “Create Record”.</p>
+  </li>
+  <li>
+    <p>Flip the Alias switch, enter “Alias to S3 website endpoint” and then choose the zone where your bucket is hosted, eg: US East (N. Virginia) us-east-1, and select your S3 bucket.</p>
+  </li>
+  <li>
+    <p>Save the changes. Wait for the changes to propagate.</p>
+  </li>
 </ul>
 
-<h3 id="step-6-monitoring-and-managing-your-website">Step 6: Monitoring and Managing Your Website</h3>
+<p><strong>Our website is now hosted with a custom URL :)</strong></p>
+
+<h3 id="step-5-enable-https-with-aws-certificate-manager-optional">Step 5: Enable HTTPS with AWS Certificate Manager (Optional)</h3>
+
 <ul>
-  <li>Introduction to tools like AWS CloudWatch for monitoring website traffic and performance.</li>
+  <li>
+    <p>Lookup CloudFront from AWS services.</p>
+  </li>
+  <li>
+    <p>Create a new distribution.</p>
+  </li>
+  <li>
+    <p>Choose your S3 bucket and click on “use website endpoint” hosting.</p>
+  </li>
+  <li>
+    <p>Under “Default Cache Behavior”</p>
+
+    <ul>
+      <li>
+        <p>Change “Viewer protocol policy”: Redirect HTTP to HTTPS</p>
+      </li>
+      <li>
+        <p>Add CNAME, in this case, the necessary one would be &lt;\Custom Domain Name&gt;</p>
+      </li>
+      <li>
+        <p>Optional: We can add more CNAMEs.</p>
+      </li>
+      <li>
+        <p>Under settings: Click on “Request certificate”</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Now, in the AWS Certificate Manager, click on “Next”.</p>
+  </li>
+  <li>
+    <p>Enter your custom domain name, and click Next.</p>
+  </li>
+  <li>
+    <p>Now in the ACM dashboard, we should see a new certificate being created, click on it, and open its detailed view.</p>
+  </li>
+  <li>
+    <p>In the Domains section, click “Create records in Route 53”.</p>
+  </li>
+  <li>
+    <p>Click “Create Records”.</p>
+  </li>
+  <li>
+    <p>Now back in the CloudFront section, refresh the custom certificate list and select the newly created certificate.</p>
+  </li>
+  <li>
+    <p>Enable security, and click on “Create Distribution”.</p>
+  </li>
 </ul>
 
-<h3 id="best-practices-for-hosting-static-websites-on-aws">Best Practices for Hosting Static Websites on AWS</h3>
+<h3 id="step-6-add-ssl-certification">Step 6: Add SSL certification</h3>
+
 <ul>
-  <li>Tips for optimizing performance and security.</li>
+  <li>
+    <p>From the CloudFront dashboard, copy the “domain name” of the distribution.</p>
+  </li>
+  <li>
+    <p>We go back to Route 53 and edit the “Value/Route traffic to” of the “A” record to the copied value.</p>
+  </li>
+  <li>
+    <p>That’s it folks, we are done. :)</p>
+  </li>
+  <li>
+    <p>Let the changes propagate, and now you have a personal secure static website hosted on AWS.</p>
+  </li>
 </ul>
 
-<h3 id="conclusion">Conclusion</h3>
-<p>Summarize the key points and encourage readers to experiment with AWS for their static websites.</p>
-
-<h3 id="further-resources">Further Resources</h3>
-<ul>
-  <li>Links to AWS documentation and other helpful resources.</li>
-</ul>]]></content><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><category term="Cloud_Computing" /><category term="AWS" /><summary type="html"><![CDATA[Introduction Last semester(Fall 2023), I took cloud computing where I got a lot of exposure to Cloud technologies and some exposure to DevOps technologies.]]></summary></entry></feed>
+<h3 id="references">References</h3>
+<ol>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html">Configuring a static website on Amazon S3</a></li>
+  <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/website-hosting-custom-domain-walkthrough.html">Configuring a static website using a custom domain registered with Route 53</a></li>
+</ol>]]></content><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><category term="Cloud_Computing" /><category term="AWS" /><summary type="html"><![CDATA[]]></summary></entry></feed>
