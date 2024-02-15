@@ -5,7 +5,7 @@ categories: Java
 permalink: :title
 ---
 
-<img src="/assets/Feb 2024/Java annotation/annotation.gif" alt="Annotate this" class="blog-gif-top">
+<img src="/assets/Feb 2024/Java annotations/annotation.gif" alt="Annotate this" class="blog-gif-top">
 
 
 ## What are Java annotations and how can we customize them?
@@ -19,11 +19,11 @@ I recently began working on a Spring Boot project where Java annotations are ext
 **Common annotations:** @Override, @Deprecated, @SuppressWarnings.
 
 #### Hierarchy of Java annotations
-<img src="/assets/Feb 2024/Java annotation/JavaAnnotationhierarchy.jpg" alt="Annotate this" class="blog-gif-top">
+<img src="/assets/Feb 2024/Java annotations/JavaAnnotationshierarchy.jpg" alt="Annotate hierarchy" class="blog-gif-top">
 
 
 ### Types
-<details><summary> Standard Annotations in Java SE</summary>
+#### Standard Annotations in Java SE
 
 * @Override: Indicates that a method is intended to override a method declared in a superclass.
 
@@ -32,8 +32,7 @@ I recently began working on a Spring Boot project where Java annotations are ext
 * @FunctionalInterface: Indicates that the type declaration is intended to be a functional interface, as defined by the Java Language Specification.
 
 *And more..*
-</details>
-<details><summary> Meta-Annotations (Annotations that Apply to Other Annotations) </summary>
+#### Meta-Annotations (Annotations that Apply to Other Annotations)
 
 * @Retention: Specifies how long annotations with the annotated type are to be retained.
 
@@ -42,8 +41,7 @@ I recently began working on a Spring Boot project where Java annotations are ext
 * @Target: Marks another annotation to restrict the kinds of Java elements to which the annotation can be applied.
 
 *And more..*
-</details>
-<details><summary> Annotations for Special Purposes </summary>
+#### Annotations for Special Purposes
 
 * Annotations in Java EE: Java EE provides a set of annotations for simplifying enterprise application development, such as `@Entity`, `@Stateless`, `@WebService`, etc., used for ORM, EJBs, and web services, respectively.
 
@@ -52,14 +50,14 @@ I recently began working on a Spring Boot project where Java annotations are ext
 * Spring Framework Annotations: Widely used in developing Spring applications, such as `@Component`, `@Controller`, `@Service`, `@Repository`, `@Autowired`, `@RequestMapping`, etc., for component scanning, dependency injection, and request mapping.
 
 *And more..*
-</details>
-<details><summary> Custom Annotations </summary>
-Developers can create their own annotations to express metadata that their application should process. Custom annotations can be designed to provide configuration data, runtime information, or compile-time instructions, among other uses. </details>
+
+#### Custom Annotations
+Developers can create their own annotations to express metadata that their application should process. Custom annotations can be designed to provide configuration data, runtime information, or compile-time instructions, among other uses.
 
 Each type of annotation serves a specific purpose, from providing compiler instructions, generating documentation, or offering runtime information for frameworks and applications.
 ### Categories
 
-<details><summary> Marker Annotations </summary>
+#### Marker Annotations
 
 Marker annotations in Java are annotations that do not contain any elements. They are used simply to mark a declaration, providing metadata without any additional configuration.
 
@@ -94,8 +92,8 @@ public class ChildClass extends ParentClass {
 }
 ```
 
-</details>
-<details><summary> Single-Value Annotations </summary>
+
+#### Single-Value Annotations
 
 Single-value annotations are annotations with only one element. These elements can have default values, simplifying their usage.
 
@@ -142,8 +140,8 @@ public class SuppressWarningExample {
     }
 }
 ```
-</details>
-<details><summary> Full Annotations </summary>
+
+#### Full Annotations
 
 Full annotations in Java are annotations that have multiple elements, and when you use them, you need to provide values for all the elements. These annotations allow developers to configure and customize their usage in a more detailed manner compared to marker or single-value annotations.
 
@@ -169,8 +167,8 @@ public @interface CustomFullAnnotation {
 }
 ```
 
-</details>
-<details><summary> Repeatable Annotations </summary>
+
+#### Repeatable Annotations 
 Repeatable annotations in Java, introduced in Java 8, allow an annotation to be applied more than once to the same declaration or type use. Before Java 8, an annotation could be used only once on a given element. Repeatable annotations simplify code and make it more readable when multiple occurrences of the same annotation are needed.
 
 - Annotations that can be used more than once on the same declaration or type use.
@@ -215,8 +213,8 @@ public class Main {
 
 - Have to use @Repeatable annotation to make this work, otherwise we get an error.
 
-</details>
-<details><summary> Container Annotation </summary>
+
+#### Container Annotation
 - A container annotation in Java is an annotation that holds an array of repeated annotations. Container annotations were introduced along with repeatable annotations in Java 8 to allow an annotation to be applied more than once to the same declaration or type use. 
 - Container annotations provide a way to group multiple occurrences of the same annotation under a single container.
 
@@ -237,8 +235,8 @@ public class SecureResource {
 }
 ```
 - Also refer the previous example.
-</details>
-<details><summary> Type Annotations </summary>
+
+#### Type Annotations 
 
 Type annotations in Java, introduced in Java 8, allow you to apply annotations to types. Types in Java include classes, interfaces, enums, and type parameters. Type annotations provide a more fine-grained way to express metadata about types, enabling developers to specify additional information at the level of types rather than just declarations or elements within the code.
 
@@ -271,12 +269,11 @@ public @interface IsCustomTypeAnnotation {
 
 - Please look up more on this only if you need it.
 - Refer this [GFG - Annotations in Java](https://www.geeksforgeeks.org/annotations-in-java/#:~:text=Category%204%3A%20Type%20Annotations%C2%A0)
-</details>
 
 ### Important Methods
 
 
-1. <details><summary> annotationType() Method </summary>
+1. annotationType() Method 
    - This method is available in the `Annotation` interface.
    - It returns the `Class` object corresponding to the annotation type.
 
@@ -286,9 +283,9 @@ public @interface IsCustomTypeAnnotation {
    // extends Annotation, means, it would definitely extend Annotation class. 
    Class<? extends Annotation> annotationType = myAnnotation.annotationType();
    ```
-</details>
 
-2. <details><summary> getDeclaredMethods() Method </summary>
+
+2. getDeclaredMethods() Method 
    - Available in the `Class` class.
    - Returns an array of `Method` objects reflecting all the declared methods of a class.
 
@@ -296,9 +293,9 @@ public @interface IsCustomTypeAnnotation {
    ```java
    Method[] methods = CustomClass.class.getDeclaredMethods();
    ```
-   </details>
 
-3. <details><summary> Reflection and Annotations </summary>
+
+3. Reflection and Annotations 
    - The `java.lang.reflect` package provides classes like `Method`, `Field`, and `Constructor` that allow you to inspect and interact with annotated elements.
 
    **Example (using reflection to get annotations on a method):**
@@ -306,9 +303,9 @@ public @interface IsCustomTypeAnnotation {
    Method method = CustomClass.class.getDeclaredMethod("someMethod");
    MyAnnotation annotation = method.getAnnotation(CustomAnnotation.class);
    ```
-   </details>
 
-4. <details><summary> @Inherited Meta-Annotation </summary>
+
+4. @Inherited Meta-Annotation
    - Indicates that an annotation type should be inherited by subclasses of annotated classes.
 
    **Example:**
@@ -318,7 +315,7 @@ public @interface IsCustomTypeAnnotation {
        // Annotation elements, if any
    }
    ```
-   </details>
+
 
 
 The end!
