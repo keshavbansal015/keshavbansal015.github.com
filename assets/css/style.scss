@@ -91,15 +91,12 @@ figure {
 }
 
 .blog-gif-top {
-  // @extend .about-image;
   width: 50%;
   min-width: 200px;
   height: auto; /* Maintain aspect ratio */
   border-radius: 10%; /* Rounded corners */
   margin: 20px; /* Space outside the border */
-  // padding: 20px; /* Space between the border and the image */
   display: inline-block;
-  // float: ; /* Float the image to the left */
   margin-left: auto;
   margin-right: auto;
   transform: scale(1); /* Enlarge image */

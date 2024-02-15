@@ -24,7 +24,7 @@ I've worked on projects in cloud computing, Database Internals, NLP, and AI algo
 
 * __Project Experience__: Engaged in projects focusing on cloud computing, database internals, natural language processing (NLP), and AI algorithms. Demonstrated practical application of theoretical knowledge.
 
-* __Interests__: Database systems, Data processing, backend development, DevOps. __Anything you'd hire me for \_()\___
+* __Interests__: Database systems, Data processing, backend development, DevOps. __Anything you'd hire me for__ 🙏
 
 
 If you are a recruiter, please connect with me by following one of the links below.
