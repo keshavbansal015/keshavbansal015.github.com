@@ -1,5 +1,402 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-15T12:36:32-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
-</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Annotations in Java</title><link href="http://localhost:4000/java-annotations" rel="alternate" type="text/html" title="Annotations in Java" /><published>2024-02-15T00:00:00-06:00</published><updated>2024-02-15T00:00:00-06:00</updated><id>http://localhost:4000/java-annotations</id><content type="html" xml:base="http://localhost:4000/java-annotations"><![CDATA[<p><img src="/assets/Feb 2024/Java annotations/annotation.gif" alt="Annotate this" class="blog-gif-top" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-27T08:32:45-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
+</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Simple Servers in Java</title><link href="http://localhost:4000/java-servers" rel="alternate" type="text/html" title="Simple Servers in Java" /><published>2024-02-27T00:00:00-06:00</published><updated>2024-02-27T00:00:00-06:00</updated><id>http://localhost:4000/java-servers</id><content type="html" xml:base="http://localhost:4000/java-servers"><![CDATA[<h2 id="in-this-blog-i-would">In this blog, I would:</h2>
+
+<ol>
+  <li><a href="#first-we-create-a-hello-world-java-server">Create a Hello world Java server</a></li>
+  <li><a href="#now-we-extend-the-server-to-display-pictures-from-the-nasa-adop-api">Use NASA APOD API</a></li>
+  <li><a href="#integrate-jokeapi-to-get-jokes">User jokeapi.dev to tell you jokes</a></li>
+  <li><a href="#now-lets-try-running-2-you-can-run-more-servers-on-the-same-port-and-make-them-talk-to-each-other">And get 2 servers to talk to each other. A basic Chat application.</a></li>
+</ol>
+
+<p>This blog is to show how people can work with simple APIs and socket using Java, and create a java server
+from scratch and connect it to frontend.</p>
+
+<h3 id="first-we-create-a-hello-world-java-server">First we create a Hello world Java server.</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleHttpServer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span><span class="o">;</span> <span class="c1">// You can change this to any available port</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server listening on port "</span> <span class="o">+</span> <span class="n">port</span><span class="o">);</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Socket</span> <span class="n">clientSocket</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                <span class="n">handleRequest</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">handleRequest</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">clientSocket</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">// try-with-resources statement introduced in Java 7</span>
+        <span class="k">try</span> <span class="o">(</span>
+                <span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+                <span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">(),</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+            <span class="c1">// Read the HTTP request from the client</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Client request: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">);</span>
+
+                <span class="c1">// Break when an empty line is encountered, signaling the end of the request</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// Send a simple HTTP response back to the client</span>
+            <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="s">"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello World!, this is a server!"</span><span class="o">;</span>
+            <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="c1">// Close the client socket</span>
+        <span class="n">clientSocket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="now-a-small-discussion-for-every-module-used-in-this-code">Now, a small discussion for every module used in this code,</h4>
+
+<ul>
+  <li>
+    <p>IOException:
+ This module is used to handle Input/Output (IO) exceptions. In the context of the server,
+ IO operations like reading from or writing to streams can throw IOExceptions.</p>
+  </li>
+  <li>
+    <p>PrintWriter:
+ This module provides the capability to print formatted representations of objects to a
+ text-output stream.</p>
+  </li>
+  <li>
+    <p>ServerSocket:
+ This module provides a mechanism to listen for incoming connections on a specific port.</p>
+  </li>
+  <li>
+    <p>Socket:
+ This module represents a socket, which is an endpoint for sending or receiving data across
+ a computer network. In the server code, Socket is used to accept connections from clients.</p>
+  </li>
+  <li>
+    <p>Scanner:
+ This module is used for parsing primitive types and strings using regular expressions.</p>
+  </li>
+</ul>
+
+<p><img src="/assets/Feb 2024/SimpleServersInJava/HelloWorld.png" alt="Hello World" /></p>
+
+<ul>
+  <li>You can see the requests getting logged in the terminal.
+Now we can only send “GET” requests from the browser.</li>
+</ul>
+
+<h3 id="now-we-extend-the-server-to-display-pictures-from-the-nasa-adop-api">Now we extend the server, to display pictures from the NASA ADOP API.</h3>
+
+<p>API_KEY:<code class="language-plaintext highlighter-rouge">DEMO_KEY</code>
+API:<code class="language-plaintext highlighter-rouge">https://api.nasa.gov/planetary/apod?api_key=</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NasaADOP</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span><span class="o">;</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server listening on port "</span> <span class="o">+</span> <span class="n">port</span><span class="o">);</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Socket</span> <span class="n">clientSocket</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                <span class="n">handleRequest</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">handleRequest</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">clientSocket</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">(</span>
+                <span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+                <span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">(),</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+            <span class="c1">// Read the HTTP request from the client</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Client request: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">);</span>
+
+                <span class="c1">// Break when an empty line is encountered, signaling the end of the request</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// Fetch image URL from NASA API</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">imageUrlAndDescription</span> <span class="o">=</span> <span class="n">getImageUrlFromNasaApi</span><span class="o">();</span>
+            <span class="nc">String</span> <span class="n">embed</span> <span class="o">=</span> <span class="n">buildHtmlResponse</span><span class="o">(</span><span class="n">imageUrlAndDescription</span><span class="o">);</span>
+            <span class="nc">StringBuilder</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+
+<span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;html&gt;&lt;body&gt;&lt;h2&gt;Hello World!, this is today's APOD!&lt;/h2&gt;"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">embed</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;/body&gt;&lt;/html&gt;"</span><span class="o">);</span>
+            <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="c1">// Close the client socket</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">clientSocket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">getImageUrlFromNasaApi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Make an HTTP request to the NASA API to get the image URL</span>
+        <span class="c1">// Replace this with your actual NASA API key and the correct API endpoint</span>
+        <span class="nc">String</span> <span class="n">apiKey</span> <span class="o">=</span> <span class="s">"DEMO_KEY"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">apiUrl</span> <span class="o">=</span> <span class="s">"https://api.nasa.gov/planetary/apod?api_key="</span> <span class="o">+</span> <span class="n">apiKey</span><span class="o">;</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">returnStrings</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+        <span class="k">try</span> <span class="o">(</span><span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="n">apiUrl</span><span class="o">).</span><span class="na">openStream</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="nc">StringBuilder</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="o">}</span>
+
+            <span class="c1">// Parse the JSON response to get the image / video URL</span>
+            <span class="c1">// This is a simplified example, you may want to use a JSON</span>
+            <span class="c1">// library for robust parsing</span>
+            <span class="nc">String</span> <span class="n">responseString</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+            <span class="nc">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"title\":\""</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\","</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="nc">String</span> <span class="n">mediaLink</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\"url\":\""</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\"}"</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="nc">String</span> <span class="n">explanation</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"explanation\":\""</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\","</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">mediaLink</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">returnStrings</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+                <span class="n">returnStrings</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">mediaLink</span><span class="o">;</span>
+                <span class="n">returnStrings</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">explanation</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">returnStrings</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">buildHtmlResponse</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">imageUrlAndDescription</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StringBuilder</span> <span class="n">embed</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="n">embed</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;p&gt;&lt;h3&gt;"</span><span class="o">+</span><span class="n">imageUrlAndDescription</span><span class="o">[</span><span class="mi">0</span><span class="o">]+</span><span class="s">"&lt;/h3&gt;&lt;/p&gt;"</span><span class="o">);</span>
+        <span class="n">embed</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;p&gt;&lt;img src=\""</span><span class="o">+</span><span class="n">imageUrlAndDescription</span><span class="o">[</span><span class="mi">1</span><span class="o">]+</span><span class="s">"\"&gt;&lt;/p&gt;"</span><span class="o">);</span>
+        <span class="n">embed</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;p&gt;"</span><span class="o">+</span><span class="n">imageUrlAndDescription</span><span class="o">[</span><span class="mi">2</span><span class="o">]+</span><span class="s">"&lt;/p&gt;"</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">embed</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><img src="/assets/Feb 2024/SimpleServersInJava/APOD.png" alt="APOD Sample" /></p>
+
+<p>Now, a small discussion for other module used in this code,</p>
+
+<ul>
+  <li>URL:
+the URL class in Java provides a convenient and straightforward way to work with URLs,
+making it a valuable tool for tasks involving network resources and web services.</li>
+</ul>
+
+<h3 id="integrate-jokeapi-to-get-jokes">Integrate Joke.api to get jokes:</h3>
+
+<p>API: <code class="language-plaintext highlighter-rouge">https://v2.jokeapi.dev/joke/Any</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GetThisJoke</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span><span class="o">;</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server listening on port "</span> <span class="o">+</span> <span class="n">port</span><span class="o">);</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">Socket</span> <span class="n">clientSocket</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                <span class="n">handleRequest</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">handleRequest</span><span class="o">(</span><span class="nc">Socket</span> <span class="n">clientSocket</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">(</span>
+                <span class="nc">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+                <span class="nc">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="n">clientSocket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">(),</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+            <span class="c1">// Read the HTTP request from the client</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Client request: "</span> <span class="o">+</span> <span class="n">line</span><span class="o">);</span>
+
+                <span class="c1">// Break when an empty line is encountered, signaling the end of the request</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">line</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// Send an HTML response with a form</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">joke</span> <span class="o">=</span> <span class="n">makeApiRequest</span><span class="o">();</span>
+            <span class="nc">StringBuilder</span> <span class="n">outJoke</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">joke</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">outJoke</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">joke</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+                <span class="n">outJoke</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"\n\r"</span><span class="o">);</span>
+                <span class="n">outJoke</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">joke</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">outJoke</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">joke</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+            <span class="o">}</span>
+            <span class="nc">String</span> <span class="n">embed</span> <span class="o">=</span> <span class="n">outJoke</span>
+                    <span class="o">.</span><span class="na">toString</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"\\n"</span><span class="o">,</span> <span class="s">" "</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"\\\""</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+
+                    <span class="nc">StringBuilder</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;html&gt;&lt;body&gt;"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;h2&gt;Hello World!, this is a server with Java backend!&lt;/h2&gt;"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;form action=\"/submit\" method=\"get\"&gt;"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;input type=\"submit\" value=\"Get new joke!\"&gt;&lt;/form&gt;"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"&lt;p id=\"apiResponse\"&gt;"</span> <span class="o">+</span> <span class="n">embed</span> <span class="o">+</span> <span class="s">"&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"</span><span class="o">);</span>
+            <span class="n">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="c1">// Close the client socket</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">clientSocket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">makeApiRequest</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// Simulate making an API request and return the response</span>
+        <span class="nc">String</span> <span class="n">apiUrl</span> <span class="o">=</span> <span class="s">"https://v2.jokeapi.dev/joke/Any"</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">(</span>
+                <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="n">apiUrl</span><span class="o">).</span><span class="na">openStream</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="nc">StringBuilder</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">hasNextLine</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">());</span>
+            <span class="o">}</span>
+
+            <span class="nc">String</span> <span class="n">responseString</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">responseString</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"\"joke\""</span><span class="o">))</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">premise</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\"joke\":"</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\"flags\""</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="nc">String</span><span class="o">[]</span> <span class="n">returnResponse</span> <span class="o">=</span> <span class="o">{</span> <span class="n">premise</span><span class="o">,</span> <span class="k">new</span> <span class="nc">String</span><span class="o">()</span> <span class="o">};</span>
+                <span class="k">return</span> <span class="n">returnResponse</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">premise</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\"setup\":"</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\"delivery\""</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="nc">String</span> <span class="n">punchline</span> <span class="o">=</span> <span class="n">responseString</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\"delivery\":"</span><span class="o">)[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\"flags\""</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span> <span class="n">premise</span><span class="o">,</span> <span class="n">punchline</span> <span class="o">};</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">ioException</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ioException</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">empStrings</span> <span class="o">=</span> <span class="o">{</span> <span class="s">""</span><span class="o">,</span> <span class="s">""</span> <span class="o">};</span>
+        <span class="k">return</span> <span class="n">empStrings</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p><img src="/assets/Feb 2024/SimpleServersInJava/joke.png" alt="Sample joke" /></p>
+
+<h3 id="now-lets-try-running-2-you-can-run-more-servers-on-the-same-port-and-make-them-talk-to-each-other">Now, lets try running 2 (you can run more) servers on the same port and make them talk to each other</h3>
+
+<p>Server 1:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">8080</span><span class="o">;</span>
+            <span class="nc">ServerSocket</span> <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server 1 is waiting for connections..."</span><span class="o">);</span>
+
+            <span class="nc">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Connected to client: "</span> <span class="o">+</span> <span class="n">socket</span><span class="o">.</span><span class="na">getInetAddress</span><span class="o">());</span>
+
+            <span class="nc">BufferedReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+            <span class="nc">PrintWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PrintWriter</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">(),</span> <span class="kc">true</span><span class="o">);</span>
+
+            <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// Server 1 receives a message</span>
+                        <span class="nc">String</span> <span class="n">receivedMessage</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">receivedMessage</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="k">break</span><span class="o">;</span>
+                        <span class="o">}</span>
+                        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Received: "</span> <span class="o">+</span> <span class="n">receivedMessage</span><span class="o">);</span>
+
+                        <span class="c1">// Server 1 sends a response</span>
+                        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Server 1: "</span><span class="o">);</span>
+                        <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">getUserInput</span><span class="o">();</span>
+                        <span class="n">writer</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// Server 1 sends a message</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"Server 1: "</span><span class="o">);</span>
+                <span class="nc">String</span> <span class="n">message</span> <span class="o">=</span> <span class="n">getUserInput</span><span class="o">();</span>
+                <span class="n">writer</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+
+                <span class="c1">// Server 1 receives a response</span>
+                <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Received: "</span> <span class="o">+</span> <span class="n">response</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">getUserInput</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">BufferedReader</span> <span class="n">consoleReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span>
+            <span class="k">return</span> <span class="n">consoleReader</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Server 2 code is same with minor differences in print statements.
+When you run them:</p>
+
+<p><img src="/assets/Feb 2024/SimpleServersInJava/server.png" alt="Server Terminal" />
+<img src="/assets/Feb 2024/SimpleServersInJava/client.png" alt="Client Terminal" /></p>
+
+<ul>
+  <li>BufferedReader: Used for reading text from a character-based input stream (e.g., reading messages from the client).</li>
+  <li>InputStreamReader: Converts bytes into characters. In this context, it’s used to wrap the InputStream from the Socket to create a BufferedReader for reading messages.</li>
+</ul>
+
+<ol>
+  <li>Now lets try running servers on different ports and make then talk to each other.</li>
+</ol>
+
+<p>References:</p>
+
+<ol>
+  <li><a href="https://www.baeldung.com/java-url">java.net.URL</a></li>
+  <li><a href="https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html">java.net</a></li>
+  <li><a href="https://api.nasa.gov/">NASA APIs</a></li>
+  <li><a href="https://medium.com/nerd-for-tech/create-a-chat-app-with-java-sockets-8449fdaa933">Java chat server</a></li>
+</ol>]]></content><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><category term="Java" /><summary type="html"><![CDATA[In this blog, I would:]]></summary></entry><entry><title type="html">Annotations in Java</title><link href="http://localhost:4000/java-annotations" rel="alternate" type="text/html" title="Annotations in Java" /><published>2024-02-15T00:00:00-06:00</published><updated>2024-02-15T00:00:00-06:00</updated><id>http://localhost:4000/java-annotations</id><content type="html" xml:base="http://localhost:4000/java-annotations"><![CDATA[<p><img src="/assets/Feb 2024/Java annotations/annotation.gif" alt="Annotate this" class="blog-gif-top" /></p>
 
 <h2 id="what-are-java-annotations-and-how-can-we-customize-them">What are Java annotations and how can we customize them?</h2>
 
