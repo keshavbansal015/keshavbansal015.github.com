@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-27T08:32:45-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
-</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Simple Servers in Java</title><link href="http://localhost:4000/java-servers" rel="alternate" type="text/html" title="Simple Servers in Java" /><published>2024-02-27T00:00:00-06:00</published><updated>2024-02-27T00:00:00-06:00</updated><id>http://localhost:4000/java-servers</id><content type="html" xml:base="http://localhost:4000/java-servers"><![CDATA[<h2 id="in-this-blog-i-would">In this blog, I would:</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-27T08:48:43-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Keshav Bansal</title><subtitle>Welcome to my digital space, where I chronicle my adventures in technology and learning.  My goal is to regularly update this site with engaging blog posts, insightful book and paper reviews, and innovative project developments.  I hope that visitors to my website leave with a smile, having gained new knowledge and feeling inspired to explore and create.  Join me on this exciting journey of continuous growth and discovery!
+</subtitle><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><entry><title type="html">Simple Servers in Java</title><link href="http://localhost:4000/java-servers" rel="alternate" type="text/html" title="Simple Servers in Java" /><published>2024-02-27T00:00:00-06:00</published><updated>2024-02-27T00:00:00-06:00</updated><id>http://localhost:4000/java-servers</id><content type="html" xml:base="http://localhost:4000/java-servers"><![CDATA[<p><img src="/assets/Feb 2024/SimpleServersInJava/servers.gif" alt="Annotate this" class="blog-gif-top" /></p>
+
+<h2 id="in-this-blog-i-would">In this blog, I would:</h2>
 
 <ol>
   <li><a href="#first-we-create-a-hello-world-java-server">Create a Hello world Java server</a></li>
@@ -9,7 +11,7 @@
 </ol>
 
 <p>This blog is to show how people can work with simple APIs and socket using Java, and create a java server
-from scratch and connect it to frontend.</p>
+from scratch.</p>
 
 <h3 id="first-we-create-a-hello-world-java-server">First we create a Hello world Java server.</h3>
 
@@ -396,7 +398,7 @@ When you run them:</p>
   <li><a href="https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html">java.net</a></li>
   <li><a href="https://api.nasa.gov/">NASA APIs</a></li>
   <li><a href="https://medium.com/nerd-for-tech/create-a-chat-app-with-java-sockets-8449fdaa933">Java chat server</a></li>
-</ol>]]></content><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><category term="Java" /><summary type="html"><![CDATA[In this blog, I would:]]></summary></entry><entry><title type="html">Annotations in Java</title><link href="http://localhost:4000/java-annotations" rel="alternate" type="text/html" title="Annotations in Java" /><published>2024-02-15T00:00:00-06:00</published><updated>2024-02-15T00:00:00-06:00</updated><id>http://localhost:4000/java-annotations</id><content type="html" xml:base="http://localhost:4000/java-annotations"><![CDATA[<p><img src="/assets/Feb 2024/Java annotations/annotation.gif" alt="Annotate this" class="blog-gif-top" /></p>
+</ol>]]></content><author><name>Keshav Bansal</name><email>keshavbansal015@gmail.com</email></author><category term="Java" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Annotations in Java</title><link href="http://localhost:4000/java-annotations" rel="alternate" type="text/html" title="Annotations in Java" /><published>2024-02-15T00:00:00-06:00</published><updated>2024-02-15T00:00:00-06:00</updated><id>http://localhost:4000/java-annotations</id><content type="html" xml:base="http://localhost:4000/java-annotations"><![CDATA[<p><img src="/assets/Feb 2024/Java annotations/annotation.gif" alt="Annotate this" class="blog-gif-top" /></p>
 
 <h2 id="what-are-java-annotations-and-how-can-we-customize-them">What are Java annotations and how can we customize them?</h2>
 

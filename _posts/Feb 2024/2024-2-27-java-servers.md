@@ -5,6 +5,8 @@ categories: Java
 permalink: :title
 ---
 
+<img src="/assets/Feb 2024/SimpleServersInJava/servers.gif" alt="Annotate this" class="blog-gif-top">
+
 ## In this blog, I would:
 
 1. [Create a Hello world Java server](#first-we-create-a-hello-world-java-server)
@@ -14,7 +16,7 @@ permalink: :title
 
 
 This blog is to show how people can work with simple APIs and socket using Java, and create a java server
-from scratch and connect it to frontend.
+from scratch.
 
 ### First we create a Hello world Java server.
 
